@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Administrador</title>
+</head>
+<body>
+    <h1>ADMINISTRADOR</h1>
+    <form method="POST" action="{{ url_for('create_user') }}">
+        <input type="email" name="email" placeholder="correo" required>
+        <input type="password" name="password" placeholder="contraseña" required>
+        <input type="text" name="rol" placeholder="rol" required>
+        <button type="submit">Crear usuario</button>
+    </form>
+
+    <form method="POST" action="{{ url_for('load_menus') }}">
+        <button type="submit">Cargar Menús</button>
+    </form>
+
+    <div>
+        <h2>RESTAURANTE 1</h2>
+        <form method="POST" action="{{ url_for('add_option') }}">
+            <h3>ENTRADA</h3>
+            {% for option in restaurant1_entradas %}
+                <input type="checkbox" name="entrada" value="{{ option.id }}"> {{ option.opcion }}
+            {% endfor %}
+            <input type="text" name="new_entrada" placeholder="agregar opción">
+            <button type="submit">Agregar opción</button>
+
+            <h3>FUERTE</h3>
+            {% for option in restaurant1_fuertes %}
+                <input type="checkbox" name="fuerte" value="{{ option.id }}"> {{ option.opcion }}
+            {% endfor %}
+            <input type="text" name="new_fuerte" placeholder="agregar opción">
+            <button type="submit">Agregar opción</button>
+
+            <h3>PROTEINA</h3>
+            {% for option in restaurant1_proteinas %}
+                <input type="checkbox" name="proteina" value="{{ option.id }}"> {{ option.opcion }}
+            {% endfor %}
+            <input type="text" name="new_proteina" placeholder="agregar opción">
+            <button type="submit">Agregar opción</button>
+        </form>
+
+        <h2>RESTAURANTE 2</h2>
+        <form method="POST" action="{{ url_for('add_option') }}">
+            <h3>ENTRADA</h3>
+            {% for option in restaurant2_entradas %}
+                <input type="checkbox" name="entrada" value="{{ option.id }}"> {{ option.opcion }}
+            {% endfor %}
+            <input type="text" name="new_entrada" placeholder="agregar opción">
+            <button type="submit">Agregar opción</button>
+
+            <h3>FUERTE</h3>
+            {% for option in restaurant2_fuertes %}
+                <input type="checkbox" name="fuerte" value="{{ option.id }}"> {{ option.opcion }}
+            {% endfor %}
+            <input type="text" name="new_fuerte" placeholder="agregar opción">
+            <button type="submit">Agregar opción</button>
+
+            <h3>PROTEINA</h3>
+            {% for option in restaurant2_proteinas %}
+                <input type="checkbox" name="proteina" value="{{ option.id }}"> {{ option.opcion }}
+            {% endfor %}
+            <input type="text" name="new_proteina" placeholder="agregar opción">
+            <button type="submit">Agregar opción</button>
+        </form>
+    </div>
+
+    <h2>RESUMEN DE PEDIDOS</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Correo</th>
+                <th>Entrada</th>
+                <th>Fuerte</th>
+                <th>Proteina</th>
+                <th>Restaurante</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+                <tr>
+                    <td>{{ pedido.correo }}</td>
+                    <td>{{ pedido.entrada }}</td>
+                    <td>{{ pedido.fuerte }}</td>
+                    <td>{{ pedido.proteina }}</td>
+                    <td>{{ pedido.restaurante }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
